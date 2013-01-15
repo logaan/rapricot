@@ -19,6 +19,7 @@ Your editor will even have highlighting support.
 
 ## Example
 
+```ruby
     puts Rapricot.parse(
       [:html,
         [:head,
@@ -26,9 +27,11 @@ Your editor will even have highlighting support.
         [:body,
           [:p, {class: "cute"},
             [:strong, "Kittens"], " and ", [:strong, "Ducks"]]]])
+```
 
 Will print (all on one line):
 
+```html
     <html>
       <head>
         <title>Small animals</title>
@@ -39,4 +42,5 @@ Will print (all on one line):
         </p>
       </body>
     </html>
+```
 

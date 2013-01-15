@@ -1,3 +1,5 @@
+# rapricot
+
 **rapricot** *verb:* When someone shoves an apricot in another person's mouth
 without their consent.
 

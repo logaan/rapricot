@@ -20,7 +20,7 @@ Your editor will even have highlighting support.
 ## Example
 
 ```ruby
-puts Rapricot.parse(
+puts Rapricot.render(
   [:html,
     [:head,
       [:title, "Small animals"]],

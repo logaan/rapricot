@@ -1,14 +1,14 @@
 class Rapricot
-  def self.parse(document)
+  def self.render(document)
     case document
     when Array
-      parse_element(document)
+      render_element(document)
     else
       document.to_s
     end
   end
 
-  def self.parse_element(element)
+  def self.render_element(element)
     tag = element[0]
     optional_attributes = element[1]
 
@@ -21,10 +21,10 @@ class Rapricot
         " #{key}=\"#{value}\""
       end.join
 
-      content = element[2..-1].map{|c| parse(c) }.join
+      content = element[2..-1].map{|c| render(c) }.join
     else
       attributes = ""
-      content = element[1..-1].map{|c| parse(c) }.join
+      content = element[1..-1].map{|c| render(c) }.join
     end
 
     start_of_tag + attributes + end_of_tag + content + closing_tag

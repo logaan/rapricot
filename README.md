@@ -1,7 +1,8 @@
 # rapricot
 
 <img src="http://logaan.net/files/images/kid-eating-apricot.jpg"
- alt="Child eating apricot" title="My face when I haml" align="right" />
+ alt="Child eating apricot" title="My face when I haml" align="right"
+ style="margin: 1em" />
 
 **rapricot** *verb:* When someone shoves an apricot in another person's mouth
 without their consent.

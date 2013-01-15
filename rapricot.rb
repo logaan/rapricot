@@ -31,24 +31,3 @@ class Rapricot
   end
 end
 
-puts Rapricot.parse(
-  [:html,
-    [:head,
-      [:title, "Small animals"]],
-    [:body,
-      [:p, {class: "cute"},
-        [:strong, "Kittens"], " and ", [:strong, "Ducks"]]]])
-
-# Returns (except all on one line):
-
-# <html>
-#   <head>
-#     <title>Small animals</title>
-#   </head>
-#   <body>
-#     <p class="cute">
-#       <strong>Kittens</strong> and <strong>Ducks</strong>
-#     </p>
-#   </body>
-# </html>
-

@@ -17,3 +17,26 @@ your view code and understand what the hell is going on.
 
 Your editor will even have highlighting support.
 
+## Example
+
+    puts Rapricot.parse(
+      [:html,
+        [:head,
+          [:title, "Small animals"]],
+        [:body,
+          [:p, {class: "cute"},
+            [:strong, "Kittens"], " and ", [:strong, "Ducks"]]]])
+
+Will print (all on one line):
+
+    <html>
+      <head>
+        <title>Small animals</title>
+      </head>
+      <body>
+        <p class="cute">
+          <strong>Kittens</strong> and <strong>Ducks</strong>
+        </p>
+      </body>
+    </html>
+

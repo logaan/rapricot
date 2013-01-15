@@ -20,27 +20,27 @@ Your editor will even have highlighting support.
 ## Example
 
 ```ruby
-    puts Rapricot.parse(
-      [:html,
-        [:head,
-          [:title, "Small animals"]],
-        [:body,
-          [:p, {class: "cute"},
-            [:strong, "Kittens"], " and ", [:strong, "Ducks"]]]])
+puts Rapricot.parse(
+  [:html,
+    [:head,
+      [:title, "Small animals"]],
+    [:body,
+      [:p, {class: "cute"},
+        [:strong, "Kittens"], " and ", [:strong, "Ducks"]]]])
 ```
 
 Will print (all on one line):
 
 ```html
-    <html>
-      <head>
-        <title>Small animals</title>
-      </head>
-      <body>
-        <p class="cute">
-          <strong>Kittens</strong> and <strong>Ducks</strong>
-        </p>
-      </body>
-    </html>
+<html>
+  <head>
+    <title>Small animals</title>
+  </head>
+  <body>
+    <p class="cute">
+      <strong>Kittens</strong> and <strong>Ducks</strong>
+    </p>
+  </body>
+</html>
 ```
 

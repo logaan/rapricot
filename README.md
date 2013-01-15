@@ -46,6 +46,6 @@ Will print (all on one line):
 
 ## Credits
 
-[the word](http://www.urbandictionary.com/define.php?term=rapricot&defid=6557448)[the inspiration]
+[the word](http://www.urbandictionary.com/define.php?term=rapricot&defid=6557448)
 [the inspiration](https://github.com/weavejester/hiccup)
 

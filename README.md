@@ -49,25 +49,25 @@ Will print (all on one line):
 ```ruby
 # Form Helper
 def text_field(name, value)
-  [:input, {type: text, name: name, value: value}]
+  [:input, {type: "text", name: name, value: value}]
 end
 
 # Partial
 def user_partial(user)
   [:div, {class: "user"},
-    [:span, {class: "name"}, user.name]
-    [:ul, {class: "friends"}].concat(user.friends.map |friend|
+    [:span, {class: "name"}, user.name],
+    [:ul, {class: "friends"}].concat(user.friends.map do |friend|
       [:li, {class: "friend"}, friend.name]
     end)]
 end
 
 # Layout
 def default_layout(title, page)
-  [:html
-    [:head
-      [:title title]]
-    [:body
-      [:div, {id: container}].concat(page)]]
+  [:html,
+    [:head,
+      [:title, title]],
+    [:body,
+      [:div, {id: "container"}].concat(page)]]
 end
 
 # Complete view
@@ -77,9 +77,9 @@ end
 
 def user_page(user, search_query)
   Rapricot.render(
-    default_layout("#{user.name}'s page",
+    default_layout("#{user.name}'s page", [
       search_box(search_query),
-      user_partial(user)))
+      user_partial(user)]))
 end
 ```
 

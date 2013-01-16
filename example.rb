@@ -1,4 +1,4 @@
-require "./rapricot"
+require "./lib/rapricot"
 
 # Form Helper
 def text_field(name, value)

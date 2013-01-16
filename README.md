@@ -20,7 +20,7 @@ Your editor will even have highlighting support.
 ## Example
 
 ```ruby
-puts Rapricot.render(
+Rapricot.render(
   [:html,
     [:head,
       [:title, "Small animals"]],
@@ -29,16 +29,24 @@ puts Rapricot.render(
         [:strong, "Kittens"], " and ", [:strong, "Ducks"]]]])
 ```
 
-Will print (all on one line):
+Will return:
 
 ```html
 <html>
   <head>
-    <title>Small animals</title>
+    <title>
+      Small animals
+    </title>
   </head>
   <body>
     <p class="cute">
-      <strong>Kittens</strong> and <strong>Ducks</strong>
+      <strong>
+        Kittens
+      </strong>
+      and
+      <strong>
+        Ducks
+      </strong>
     </p>
   </body>
 </html>

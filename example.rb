@@ -9,6 +9,7 @@ end
 def user_partial(user)
   [:div, {class: "user"},
     [:span, {class: "name"}, user.name],
+    [:br],
     [:ul, {class: "friends"}].concat(user.friends.map do |friend|
       [:li, {class: "friend"}, friend.name]
     end)]

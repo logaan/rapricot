@@ -15,9 +15,11 @@ class Rapricot
   end
 
   def self.wrap_in_tag(tag, attributes, content)
-    "<" + tag + attributes + ">\n" +
-      content.each_line.map{|l| "  " + l }.join +
-    "</" + tag + ">"
+    "<#{tag}#{attributes}>\n" + indent_lines(content) + "</#{tag}>"
+  end
+
+  def self.indent_lines(lines)
+    lines.each_line.map{|l| "  " + l }.join
   end
 
   def self.render_attributes(element)

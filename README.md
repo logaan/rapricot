@@ -62,7 +62,7 @@ def user_partial(user)
 end
 
 # Layout
-def default_layout(title, page)
+def default_layout(title, *page)
   [:html,
     [:head,
       [:title, title]],
@@ -77,9 +77,9 @@ end
 
 def user_page(user, search_query)
   Rapricot.render(
-    default_layout("#{user.name}'s page", [
+    default_layout("#{user.name}'s page",
       search_box(search_query),
-      user_partial(user)]))
+      user_partial(user)))
 end
 ```
 

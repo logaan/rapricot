@@ -1,4 +1,8 @@
 module Rapricot
+  VOID_ELEMENTS = ["area", "base", "br", "col", "command", "embed", "hr",
+    "img", "input", "keygen", "link", "meta", "param", "source", "track",
+    "wbr"]
+
   def render(document)
     case document
       when Array then render_element(document)
@@ -8,10 +12,18 @@ module Rapricot
 
   def render_element(element)
     tag        = element.shift.to_s
-    attributes = render_attributes(element)
-    content    = element.map{|c| render(c) + "\n" }.join
+    attributes = render_attributes!(element)
 
-    wrap_in_tag(tag, attributes, content)
+    if VOID_ELEMENTS.include?(tag)
+      void_tag(tag, attributes)
+    else
+      content    = element.map{|c| render(c) + "\n" }.join
+      wrap_in_tag(tag, attributes, content)
+    end
+  end
+
+  def void_tag(tag, attributes)
+    "<#{tag}#{attributes} \\>"
   end
 
   def wrap_in_tag(tag, attributes, content)
@@ -22,7 +34,7 @@ module Rapricot
     lines.each_line.map{|l| "  " + l }.join
   end
 
-  def render_attributes(element)
+  def render_attributes!(element)
     case element.first
     when Hash
       element.shift.map do |key, value|

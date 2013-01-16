@@ -1,8 +1,5 @@
 # rapricot
 
-<img src="http://blog.americanfeast.com/images/Kid%20Eating%20Apricot%20bigstockphoto___262377.jpg"
- alt="Child eating apricot" title="My face when I haml" align="right" />
-
 **rapricot** *verb:* When someone shoves an apricot in another person's mouth
 without their consent.
 
@@ -46,4 +43,48 @@ Will print (all on one line):
   </body>
 </html>
 ```
+
+## In practice
+
+```ruby
+# Form Helper
+def text_field(name, value)
+  [:input, {type: "text", name: name, value: value}]
+end
+
+# Partial
+def user_partial(user)
+  [:div, {class: "user"},
+    [:span, {class: "name"}, user.name],
+    [:ul, {class: "friends"}].concat(user.friends.map do |friend|
+      [:li, {class: "friend"}, friend.name]
+    end)]
+end
+
+# Layout
+def default_layout(title, *page)
+  [:html,
+    [:head,
+      [:title, title]],
+    [:body,
+      [:div, {id: "container"}].concat(page)]]
+end
+
+# Complete view
+def search_box(search_query)
+  [:div, {class: "search"}, text_field("search_query", search_query)]
+end
+
+def user_page(user, search_query)
+  Rapricot.render(
+    default_layout("#{user.name}'s page",
+      search_box(search_query),
+      user_partial(user)))
+end
+```
+
+## Credits
+
+1. [the word](http://www.urbandictionary.com/define.php?term=rapricot&defid=6557448)
+2. [the inspiration](https://github.com/weavejester/hiccup)
 

@@ -30,4 +30,3 @@ class Rapricot
     start_of_tag + attributes + end_of_tag + content + closing_tag
   end
 end
-

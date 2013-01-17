@@ -23,7 +23,7 @@ module Rapricot
   end
 
   def void_tag(tag, attributes)
-    "<#{tag}#{attributes} \\>"
+    "<#{tag}#{attributes}>"
   end
 
   def wrap_in_tag(tag, attributes, content)

@@ -32,8 +32,14 @@ end
 def user_page(user, search_query)
   Rapricot.render(
     default_layout("#{user.name}'s page",
+			image_tag("a.jpg"),
       search_box(search_query),
       user_partial(user)))
+end
+
+def image_tag(src)
+	# demo of the bug - this show <img src="a.jpg" \>
+	[:img, {src: src}]
 end
 
 # Model

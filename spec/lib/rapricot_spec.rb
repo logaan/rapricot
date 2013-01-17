@@ -3,7 +3,7 @@ require 'spec_helper'
 describe Rapricot do
 	include Rapricot
 	it "should render void elements" do
-		render([:img, {src: "a.img"}]).should == "<img src=\"a.img\" >"
+		render([:img, {src: "a.img"}]).should == "<img src=\"a.img\">"
 	end
 	it "should render normal elements" do
 		render([:html]).gsub("\n","").should == "<html></html>"

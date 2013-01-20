@@ -43,7 +43,10 @@ end
 
 class Array
   def rapricot
-    Element.new(rapricot_standardised).render
+    case first
+    when Symbol then Element.new(rapricot_standardised).render
+    when Array  then map(&:rapricot).join
+    end
   end
 
   private

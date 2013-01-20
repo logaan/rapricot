@@ -1,6 +1,6 @@
 module Rapricot
-  VOID_ELEMENTS = %w[area, base, br, col, command, embed, hr, img, input,
-  keygen, link, meta, param, source, track, wbr]
+  VOID_ELEMENTS = %w[area base br col command embed hr img input keygen link
+  meta param source track wbr]
 
   def render(document)
     case document

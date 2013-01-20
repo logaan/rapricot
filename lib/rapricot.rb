@@ -1,9 +1,9 @@
-class Tag
+class Element
   VOID_ELEMENTS = %w[area base br col command embed hr img input keygen link
   meta param source track wbr]
 
   def initialize(array_form)
-    @tag, @attributes, *@content = array_form
+    @type, @attributes, *@content = array_form
   end
 
   def render
@@ -17,11 +17,15 @@ class Tag
   end
   
   def void?
-    VOID_ELEMENTS.include?(@tag.to_s)
+    VOID_ELEMENTS.include?(type.to_s)
+  end
+
+  def type
+    @type.to_s
   end
 
   def opening_tag
-    "<#{@tag}#{attributes}>"
+    "<#{type}#{attributes}>"
   end
 
   def attributes
@@ -33,13 +37,13 @@ class Tag
   end
 
   def closing_tag
-    "</#{@tag}>"
+    "</#{type}>"
   end
 end
 
 class Array
   def rapricot
-    Tag.new(rapricot_standardised).render
+    Element.new(rapricot_standardised).render
   end
 
   private

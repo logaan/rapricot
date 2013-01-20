@@ -10,9 +10,9 @@ def user_partial(user)
   [:div, {class: "user"},
     [:span, {class: "name"}, user.name],
     [:br],
-    [:ul, {class: "friends"}].concat(user.friends.map do |friend|
+    [:ul, {class: "friends"}, user.friends.map do |friend|
       [:li, {class: "friend"}, friend.name]
-    end)]
+    end]]
 end
 
 # Layout
@@ -21,7 +21,7 @@ def default_layout(title, *page)
     [:head,
       [:title, title]],
     [:body,
-      [:div, {id: "container"}].concat(page)]]
+      [:div, {id: "container"}, page]]]
 end
 
 # Complete view
@@ -30,16 +30,9 @@ def search_box(search_query)
 end
 
 def user_page(user, search_query)
-  Rapricot.render(
-    default_layout("#{user.name}'s page",
-			image_tag("a.jpg"),
-      search_box(search_query),
-      user_partial(user)))
-end
-
-def image_tag(src)
-	# demo of the bug - this show <img src="a.jpg" \>
-	[:img, {src: src}]
+  default_layout("#{user.name}'s page",
+    search_box(search_query),
+    user_partial(user)).rapricot
 end
 
 # Model

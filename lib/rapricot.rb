@@ -10,6 +10,8 @@ class Tag
     void? ? opening_tag : full_tag
   end
 
+  private
+
   def full_tag
     opening_tag + content + closing_tag
   end
@@ -22,16 +24,16 @@ class Tag
     "<#{@tag}#{attributes}>"
   end
 
+  def attributes
+    @attributes.map { |k, v| " #{k}=\"#{v}\"" }.join
+  end
+
   def content
-    "\n" + @content.map { |c| "  #{c.rapricot}\n" }.join
+    @content.map(&:rapricot).join
   end
 
   def closing_tag
     "</#{@tag}>"
-  end
-
-  def attributes
-    @attributes.map { |k, v| " #{k}=\"#{v}\"" }.join
   end
 end
 

@@ -5,11 +5,11 @@ describe "rapricot" do
     [:img, {src: "a.img"}].rapricot.should == "<img src=\"a.img\">"
   end
   it "should render normal elements" do
-    [:html].rapricot.gsub("\n","").should == "<html></html>"
+    [:html].rapricot.should == "<html></html>"
   end
   it "should render nested elements" do
     # why are there extra spaces?
-    [:html, [:head]].rapricot.gsub("\n", "").should == "<html>  <head></head></html>"
+    [:html, [:head]].rapricot.should == "<html><head></head></html>"
   end
   it "should render elements correctly" do
     #should the escape characters be shown in output?

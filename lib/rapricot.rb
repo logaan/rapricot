@@ -39,13 +39,13 @@ end
 
 class Array
   def rapricot
-    Tag.new(rapricot_standardise(self)).render
+    Tag.new(rapricot_standardised).render
   end
 
   private
 
-  def rapricot_standardise(element)
-    element[1].is_a?(Hash) ? element : element.insert(1, {})
+  def rapricot_standardised
+    self[1].is_a?(Hash) ? self : self.insert(1, {})
   end
 end
 

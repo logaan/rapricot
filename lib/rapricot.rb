@@ -4,14 +4,14 @@ module Rapricot
 
   def render(document)
     case document
-      when Array then render_element(document)
+      when Array then render_element(standardise_attributes(document))
       else document.to_s
     end
   end
 
   def render_element(element)
     tag        = element.shift.to_s
-    attributes = render_attributes!(element)
+    attributes = render_attributes(element)
 
     if VOID_ELEMENTS.include?(tag)
       void_tag(tag, attributes)
@@ -33,15 +33,15 @@ module Rapricot
     lines.each_line.map{|l| "  " + l }.join
   end
 
-  def render_attributes!(element)
-    case element.first
-    when Hash
-      element.shift.map do |key, value|
-        " #{key}=\"#{value}\""
-      end.join
-    else
-      ""
-    end
+  def standardise_attributes(element)
+    element[1].is_a?(Hash) ?
+      element : element.insert(1, {})
+  end
+
+  def render_attributes(element)
+    element.shift.map do |key, value|
+      " #{key}=\"#{value}\""
+    end.join
   end
 
   # This allows all methods can be called as Rapricot.method. A class may still

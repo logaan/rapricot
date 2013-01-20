@@ -7,7 +7,11 @@ class Tag
   end
 
   def render
-    void? ? opening_tag : opening_tag + content + closing_tag
+    void? ? opening_tag : full_tag
+  end
+
+  def full_tag
+    opening_tag + content + closing_tag
   end
   
   def void?
@@ -19,10 +23,7 @@ class Tag
   end
 
   def content
-    "\n" +
-    @content.map do |child|
-      "  " + child.rapricot + "\n"
-    end.join
+    "\n" + @content.map { |c| "  #{c.rapricot}\n" }.join
   end
 
   def closing_tag
@@ -30,9 +31,7 @@ class Tag
   end
 
   def attributes
-    @attributes.map do |key, value|
-      " #{key}=\"#{value}\""
-    end.join
+    @attributes.map { |k, v| " #{k}=\"#{v}\"" }.join
   end
 end
 
@@ -42,10 +41,10 @@ class Array
   end
 
   private
-    def rapricot_standardise(element)
-      element[1].is_a?(Hash) ?
-        element : element.insert(1, {})
-    end
+
+  def rapricot_standardise(element)
+    element[1].is_a?(Hash) ? element : element.insert(1, {})
+  end
 end
 
 class String
@@ -54,4 +53,3 @@ class String
   end
 end
 
-[:p, {class: "foo"}, "stuff", "things"].rapricot

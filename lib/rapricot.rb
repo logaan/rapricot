@@ -17,7 +17,7 @@ class Element
   end
   
   def void?
-    VOID_ELEMENTS.include?(type.to_s)
+    VOID_ELEMENTS.include?(type)
   end
 
   def type
@@ -46,6 +46,7 @@ class Array
     case first
     when Symbol then Element.new(rapricot_standardised).render
     when Array  then map(&:rapricot).join
+    else raise ArgumentError.new("First element in tag must be Symbol or Array")
     end
   end
 
@@ -61,4 +62,13 @@ class String
     self
   end
 end
+
+class Fixnum
+  def rapricot
+    self.to_s
+  end
+end
+
+p ['div#navigation', "Click me!"].rapricot
+# => <div id="navigation">Click me!</div>
 

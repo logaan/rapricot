@@ -15,7 +15,7 @@ class Element
   def full_tag
     opening_tag + content + closing_tag
   end
-  
+
   def void?
     VOID_ELEMENTS.include?(type.to_s)
   end
@@ -45,14 +45,25 @@ class Array
   def rapricot
     case first
     when Symbol then Element.new(rapricot_standardised).render
+    when String then Element.new(rapricot_standardised.split_attributes).render
     when Array  then map(&:rapricot).join
     end
   end
 
-  private
+  protected
 
   def rapricot_standardised
     self[1].is_a?(Hash) ? self : self.insert(1, {})
+  end
+
+  def split_attributes
+    splited_attributes = self[0].match /([^\.\#]*)(\#([^\.]*))?(\.(.*))?/
+    type = splited_attributes[1]
+    attributes = self[1]
+    attributes.merge!({"id" => splited_attributes[3]}) if splited_attributes[3]
+    attributes.merge!({"class" => splited_attributes[5].gsub( /\./, ' ')}) if splited_attributes[5]
+
+    [type.to_s, attributes, self[2] ]
   end
 end
 

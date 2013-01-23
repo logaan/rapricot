@@ -21,4 +21,14 @@ describe "rapricot" do
     [:p, [[:span, "foo"], [:span, "bar"]]].rapricot.should ==
       "<p><span>foo</span><span>bar</span></p>"
   end
+
+  it "should allow attributes passed in as a string" do
+    ['div#foo.bar.baz', "words"].rapricot.should ==
+      "<div id=\"foo\" class=\"bar baz\">words</div>"
+  end
+
+  it "should allow attributes passed in as a string" do
+    ['div#foo.bar.baz', {"style" => "width: 20px"}, "words"].rapricot.should ==
+      "<div style=\"width: 20px\" id=\"foo\" class=\"bar baz\">words</div>"
+  end
 end

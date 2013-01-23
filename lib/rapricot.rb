@@ -57,14 +57,20 @@ class Array
   end
 
   def split_attributes
-    splited_attributes = self[0].match /([^\.\#]*)(\#([^\.]*))?(\.(.*))?/
-    type = splited_attributes[1]
-    attributes = self[1]
-    attributes.merge!({"id" => splited_attributes[3]}) if splited_attributes[3] && attributes["id"].nil?
-    attributes.merge!({"class" => splited_attributes[5].gsub( /\./, ' ')}) if splited_attributes[5] && attributes["class"].nil?
+    splited_attr = split_string self[0]
+    [splited_attr[1].to_s, attributes(self[1], splited_attr), self[2] ]
+  end
 
+  private
 
-    [type.to_s, attributes, self[2] ]
+  def split_string attributes_string
+    attributes_string.match /([^\.\#]*)(\#([^\.]*))?(\.(.*))?/
+  end
+
+  def attributes raw_attr, attr_from_string
+    id = attr_from_string[3] && raw_attr["id"].nil? ? {"id" => attr_from_string[3]} : {}
+    classes = attr_from_string[5] && raw_attr["class"].nil? ? {"class" => attr_from_string[5].gsub( /\./, ' ')} : {}
+    raw_attr.merge(id).merge(classes)
   end
 end
 

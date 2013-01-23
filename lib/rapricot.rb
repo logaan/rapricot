@@ -60,8 +60,9 @@ class Array
     splited_attributes = self[0].match /([^\.\#]*)(\#([^\.]*))?(\.(.*))?/
     type = splited_attributes[1]
     attributes = self[1]
-    attributes.merge!({"id" => splited_attributes[3]}) if splited_attributes[3]
-    attributes.merge!({"class" => splited_attributes[5].gsub( /\./, ' ')}) if splited_attributes[5]
+    attributes.merge!({"id" => splited_attributes[3]}) if splited_attributes[3] && attributes["id"].nil?
+    attributes.merge!({"class" => splited_attributes[5].gsub( /\./, ' ')}) if splited_attributes[5] && attributes["class"].nil?
+
 
     [type.to_s, attributes, self[2] ]
   end

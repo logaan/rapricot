@@ -42,5 +42,15 @@ describe "rapricot" do
       ['div#foo.bar.baz', {"id" => nil}, "words"].rapricot.should ==
         "<div id=\"foo\" class=\"bar baz\">words</div>"
     end
+
+    it "should allow id without class from a css style selector" do
+      ['div#foo', "words"].rapricot.should ==
+        "<div id=\"foo\">words</div>"
+    end
+
+    it "should allow class without id from a css style selector" do
+      ['div.bar.baz', "words"].rapricot.should ==
+        "<div class=\"bar baz\">words</div>"
+    end
   end
 end

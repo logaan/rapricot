@@ -87,6 +87,3 @@ class Fixnum
   end
 end
 
-p ['div#navigation', "Click me!"].rapricot
-# => <div id="navigation">Click me!</div>
-

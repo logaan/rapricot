@@ -21,4 +21,26 @@ describe "rapricot" do
     [:p, [[:span, "foo"], [:span, "bar"]]].rapricot.should ==
       "<p><span>foo</span><span>bar</span></p>"
   end
+
+  describe "css selector style tags" do
+    it "should allow id and class from a css style selector" do
+      ['div#foo.bar.baz', "words"].rapricot.should ==
+        "<div id=\"foo\" class=\"bar baz\">words</div>"
+    end
+
+    it "should merge id and class from string with existing attributes" do
+      ['div#foo.bar.baz', {"style" => "width: 20px"}, "words"].rapricot.should ==
+        "<div style=\"width: 20px\" id=\"foo\" class=\"bar baz\">words</div>"
+    end
+
+    it "should give id and class from attributes a higher priority than from string" do
+      ['div#foo.bar.baz', {"id" => "butterfly"}, "words"].rapricot.should ==
+        "<div id=\"butterfly\" class=\"bar baz\">words</div>"
+    end
+
+    it "should give id and class from attributes a lower priority than from string if nil" do
+      ['div#foo.bar.baz', {"id" => nil}, "words"].rapricot.should ==
+        "<div id=\"foo\" class=\"bar baz\">words</div>"
+    end
+  end
 end

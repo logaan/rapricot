@@ -54,12 +54,26 @@ class Array
   protected
 
   def rapricot_standardised
-    self[1].is_a?(Hash) ? self : self.insert(1, {})
+    ensure_attributes.ensure_array_of_children
   end
 
   def split_attributes
     splited_attr = split_string self[0]
     [splited_attr[1].to_s, attributes(self[1], splited_attr), self[2] ]
+  end
+
+  def ensure_attributes
+    self[1].is_a?(Hash) ? self : self.insert(1, {})
+  end
+
+  def ensure_array_of_children
+    if self.length > 3
+      type, attributes = self
+      children = self[2..-1]
+      [type, attributes, children]
+    else
+      self
+    end
   end
 
   private

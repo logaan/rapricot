@@ -17,8 +17,13 @@ describe "rapricot" do
     [:input, {type: "text", name: "email", value: "email"}].rapricot.should == "<input type=\"text\" name=\"email\" value=\"email\">"
   end
 
-  it "should allow content to be a map" do
+  it "should allow content to be an array" do
     [:p, [[:span, "foo"], [:span, "bar"]]].rapricot.should ==
+      "<p><span>foo</span><span>bar</span></p>"
+  end
+
+  it "should allow multiple children without array wrapping" do
+    [:p, [:span, "foo"], [:span, "bar"]].rapricot.should ==
       "<p><span>foo</span><span>bar</span></p>"
   end
 
